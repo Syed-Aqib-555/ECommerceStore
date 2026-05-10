@@ -1,0 +1,71 @@
+﻿@page "/orderform"
+@using ECommerceStore.Models
+@using ECommerceStore.Services
+@inject OrderService OrderService
+@inject NavigationManager Navigation
+
+<h3>Order Form</h3>
+
+@if (selectedProduct == null)
+{
+    <p>No product selected.</p>
+}
+else
+{
+    <EditForm Model="order" OnValidSubmit="PlaceOrder">
+        <div class="mb-3">
+            <label>Name</label>
+            <InputText class="form-control" @bind-Value="order.CustomerName" />
+        </div>
+
+        <div class="mb-3">
+            <label>Address</label>
+            <InputText class="form-control" @bind-Value="order.Address" />
+        </div>
+
+        <div class="mb-3">
+            <label>Contact Number</label>
+            <InputText class="form-control" @bind-Value="order.ContactNumber" />
+        </div>
+
+        <div class="mb-3">
+            <label>Quantity</label>
+            <InputNumber class="form-control" @bind-Value="order.Quantity" />
+        </div>
+
+        <div class="mb-3">
+            <label>Product</label>
+            <input class="form-control" value="@selectedProduct.Name" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label>Price</label>
+            <input class="form-control" value="@selectedProduct.Price" readonly />
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Place Order
+        </button>
+    </EditForm>
+}
+
+@code {
+    private Product? selectedProduct;
+    private Order order = new();
+
+    protected override void OnInitialized()
+    {
+        selectedProduct = OrderService.GetSelectedProduct();
+
+        if (selectedProduct != null)
+        {
+            order.Product = selectedProduct;
+        }
+    }
+
+    private void PlaceOrder()
+    {
+        OrderService.PlaceOrder(order);
+        Navigation.NavigateTo("/orderconfirmed");
+    }
+}
