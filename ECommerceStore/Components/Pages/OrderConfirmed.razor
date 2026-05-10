@@ -1,0 +1,43 @@
+﻿@page "/orderconfirmed"
+@using ECommerceStore.Models
+@using ECommerceStore.Services
+@inject OrderService OrderService
+@inject NavigationManager Navigation
+
+<h3>Order Confirmation</h3>
+
+@if (lastOrder == null)
+{
+    <p>No order has been placed yet.</p>
+}
+else
+{
+    <div class="card shadow p-4">
+        <h4 class="text-success">Thank you for your order!</h4>
+        <hr />
+
+        <p><strong>Customer:</strong> @lastOrder.CustomerName</p>
+        <p><strong>Product:</strong> @lastOrder.Product?.Name</p>
+        <p><strong>Quantity:</strong> @lastOrder.Quantity</p>
+        <p><strong>Total Price:</strong> Rs. @lastOrder.TotalPrice</p>
+
+        <button class="btn btn-primary mt-3"
+                @onclick="GoHome">
+            Back to Home
+        </button>
+    </div>
+}
+
+@code {
+    private Order? lastOrder;
+
+    protected override void OnInitialized()
+    {
+        lastOrder = OrderService.GetLastOrder();
+    }
+
+    private void GoHome()
+    {
+        Navigation.NavigateTo("/");
+    }
+}
