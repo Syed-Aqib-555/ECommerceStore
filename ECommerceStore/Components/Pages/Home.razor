@@ -5,27 +5,68 @@
 @inject OrderService OrderService
 @inject NavigationManager Navigation
 
-<h3 class="mb-4">Product Showcase</h3>
+<div class="container py-5">
+    <!-- Hero Section -->
+    <div class="bg-primary text-white rounded-4 shadow-lg p-5 mb-5 text-center">
+        <h1 class="display-4 fw-bold">🛒 Welcome to E-Commerce Store</h1>
+        <p class="lead mt-3">
+            Discover premium gadgets and accessories at unbeatable prices.
+        </p>
+        <p class="mb-0">
+            Fast delivery • Secure ordering • Best quality products
+        </p>
+    </div>
 
-<div class="row">
-    @foreach (var product in products)
-    {
-        <div class="col-md-3 mb-4">
-            <div class="card h-100 shadow">
-                <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" />
-                <div class="card-body text-center">
-                    <h5 class="card-title">@product.Name</h5>
-                    <p class="card-text fw-bold text-success">
-                        Rs. @product.Price
-                    </p>
-                    <button class="btn btn-primary"
-                            @onclick="() => OrderNow(product)">
-                        Order Now
-                    </button>
+    <!-- Section Title -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Featured Products</h2>
+        <p class="text-muted">
+            Choose your favorite product and place your order instantly.
+        </p>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="row g-4">
+        @foreach (var product in products)
+        {
+            <div class="col-lg-3 col-md-6">
+                <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
+                    <!-- Product Image -->
+                    <img src="@product.ImageUrl"
+                         class="card-img-top"
+                         alt="@product.Name"
+                         style="height: 220px; object-fit: cover;" />
+
+                    <!-- Card Body -->
+                    <div class="card-body d-flex flex-column text-center p-4">
+                        <h5 class="card-title fw-bold mb-3">
+                            @product.Name
+                        </h5>
+
+                        <div class="mb-4">
+                            <span class="badge bg-success fs-6 px-3 py-2 rounded-pill">
+                                Rs. @product.Price.ToString("N0")
+                            </span>
+                        </div>
+
+                        <div class="mt-auto">
+                            <button class="btn btn-primary btn-lg w-100 rounded-pill shadow-sm"
+                                    @onclick="() => OrderNow(product)">
+                                🛍️ Order Now
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
+
+    <!-- Footer Info -->
+    <div class="text-center mt-5 pt-4 border-top">
+        <p class="text-muted mb-0">
+            © 2026 E-Commerce Store | Built with Blazor Server & Bootstrap
+        </p>
+    </div>
 </div>
 
 @code {
