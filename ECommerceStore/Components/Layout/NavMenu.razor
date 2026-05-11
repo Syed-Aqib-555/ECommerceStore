@@ -1,23 +1,31 @@
-﻿<div class="top-row ps-3 navbar navbar-dark bg-primary">
+﻿<div class="top-row ps-3 navbar navbar-dark sa-navbar">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">E-Commerce Store</a>
+        <a class="navbar-brand fw-bold fs-4 text-white" href="">
+            <span class="text-primary">SA</span> Store
+        </a>
     </div>
 </div>
 
 <input type="checkbox" title="Navigation menu" class="navbar-toggler" />
 
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                Home
+<div class="nav-scrollable"
+     onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="nav flex-column p-3">
+
+        <div class="nav-item mb-2">
+            <NavLink class="nav-link sa-nav-link"
+                     href=""
+                     Match="NavLinkMatch.All">
+                🏠 Home
             </NavLink>
         </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="orderconfirmed">
-                Orders
+        <div class="nav-item mb-2">
+            <NavLink class="nav-link sa-nav-link"
+                     href="orderconfirmed">
+                📦 Orders
             </NavLink>
         </div>
+
     </nav>
 </div>
